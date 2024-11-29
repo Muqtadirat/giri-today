@@ -44,11 +44,17 @@ export interface ProductProps {
 export interface ProductState {
   allProducts: ProductProps[];
   categories: CategoryProps[];
+  selectedBrand: string | null;
+  selectedCategory: string | null;
+  selectedSubCategory: string | null;
 }
 
 const initialState: ProductState = {
   allProducts: [],
   categories: [],
+  selectedBrand: '',
+  selectedCategory: '',
+  selectedSubCategory: '',
 };
 
 const productSlice = createSlice({
@@ -57,6 +63,15 @@ const productSlice = createSlice({
   reducers: {
     setProducts(state, action: PayloadAction<ProductProps[]>) {
       state.allProducts = action.payload;
+    },
+    setSelectedCategory(state, action: PayloadAction<string | null>) {
+      state.selectedCategory = action.payload;
+    },
+    setSelectedSubCategory(state, action: PayloadAction<string | null>) {
+      state.selectedSubCategory = action.payload;
+    },
+    setSelectedBrand(state, action: PayloadAction<string | null>) {
+      state.selectedBrand = action.payload;
     },
   },
 });

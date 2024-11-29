@@ -2,18 +2,13 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getProductsHandler } from '@/services/productService';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { dispatch, useProductSlice } from '@/redux';
 import { Card, CardSkeleton, NoProduct } from '@/app/components';
 
-const NewReleases = () => {
-   const {
-    setProducts,
-    allProducts,
-    selectedCategory,
-    selectedSubCategory,
-  
-  } = useProductSlice();
+const PopularItems = () => {
+  const { setProducts, allProducts, selectedCategory, selectedSubCategory } =
+    useProductSlice();
 
   const { isSuccess, data, isLoading } = useQuery({
     queryFn: () => getProductsHandler(),
@@ -28,20 +23,20 @@ const NewReleases = () => {
   }, [dispatch, isSuccess, data]);
 
   const filteredProducts = allProducts.filter((product) => {
-    const isNew = product.tags.includes('new');
+    const isPopular = product.tags.includes('popular');
     const matchesCategory = selectedCategory
       ? product.category === selectedCategory
       : true;
     const matchesSubCategory = selectedSubCategory
       ? product.subcategory === selectedSubCategory
       : true;
-    return isNew && matchesCategory && matchesSubCategory;
+    return isPopular && matchesCategory && matchesSubCategory;
   });
 
   return (
     <div className="mt-8">
       <p className="text-lg lg:text-3xl mb-6 font-raleway font-semibold text-text-default">
-        New releases
+        Popular items
       </p>
       <div className="grid lg:grid-cols-4 gap-6">
         {isLoading ? (
@@ -62,4 +57,4 @@ const NewReleases = () => {
   );
 };
 
-export default NewReleases;
+export default PopularItems;

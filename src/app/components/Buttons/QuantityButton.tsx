@@ -2,37 +2,39 @@
 
 import { minusIcon, plusIcon } from '@/assets/assets';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { dispatch, RootState } from '@/redux/store';
+import { useCartSlice } from '@/redux';
 
 interface QuantityButtonProps {
-  initialQuantity?: number;
-  onQuantityChange?: (quantity: number) => void;
+  id: string;
 }
 
-const QuantityButton: React.FC<QuantityButtonProps> = ({
-  initialQuantity = 1,
-  onQuantityChange,
-}) => {
-  const [quantity, setQuantity] = useState(initialQuantity);
+const QuantityButton: React.FC<QuantityButtonProps> = ({ id }) => {
+  const { items, updateQuantity,removeFromCart } = useCartSlice();
 
+  const item = items.find((item) => item.id === id);
+  const quantity = item ? item.quantity : 0;
   const handleIncrease = () => {
-    setQuantity((prevQuantity) => {
-      const newQuantity = prevQuantity + 1;
-      if (onQuantityChange) onQuantityChange(newQuantity);
-      return newQuantity;
-    });
+    if (item) {
+      const newQuantity = quantity + 1;
+      dispatch(updateQuantity({ id, quantity: newQuantity }));
+    }
   };
 
   const handleDecrease = () => {
-    setQuantity((prevQuantity) => {
-      const newQuantity = Math.max(1, prevQuantity - 1);
-      if (onQuantityChange) onQuantityChange(newQuantity);
-      return newQuantity;
-    });
+    if (item) {
+      const newQuantity = quantity - 1;
+      if (newQuantity < 1) {
+        dispatch(removeFromCart(id));
+      } else {
+        dispatch(updateQuantity({ id, quantity: newQuantity }));
+      }
+    }
   };
 
   return (
-    <div className="w-fit flex items-center gap-4 px-4 py-2 rounded-lg border border-black">
+    <div className="w-fit h-fit flex items-center gap-4 px-4 py-2 rounded-lg border border-black">
       <button
         onClick={handleDecrease}
         className="w-8 h-8 flex justify-center items-center"

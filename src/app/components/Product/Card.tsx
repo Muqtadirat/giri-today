@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { star } from '@/assets/assets';
 import { formatPrice, getBrandLogo } from '@/utils';
 import { CardProps } from '@/redux';
+import { CartButton } from '../Buttons';
 
 interface ProductCardProps {
   cardDetails: CardProps;
@@ -19,16 +20,23 @@ const Card: React.FC<ProductCardProps> = ({ cardDetails }) => {
         <Image
           src={image}
           alt={`${name} product image`}
-          width={100}
+          width={500}
           height={100}
+          quality={100}
+          priority
           className="w-full h-[214px] object-cover"
         />
       </Link>
       <div className="p-4 space-y-2">
-        <p className="text-base font-medium text-text-primary">{name}</p>
-        <p className="text-lg font-semibold text-primary">
-          ₦{formatPrice(price)}
-        </p>
+        <div className="flex justify-between">
+          <div>
+            <p className="text-base font-medium text-text-primary">{name}</p>
+            <p className="text-lg font-semibold text-primary">
+              ₦{formatPrice(price)}
+            </p>
+          </div>
+          <CartButton product={cardDetails}/>
+        </div>
         <div className="flex justify-between items-center">
           {brandLogoSrc && (
             <Image
