@@ -1,0 +1,57 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# css
+*.css
+
+# dependencies
+/node_modules
+/.pnp
+/.github
+/public
+.pnp.js
+.prettierrc
+.eslintrc.json
+
+# Source code
+/src/analytics.js
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+
+# Production
+/build
+/contributing
+
+# Miscellaneous
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local environment files
+.env
+.env*.local
+.env.development.local
+
+# Vercel
+.vercel
+.firebase
+
+# Visual Studio Code
+.vscode
+firebase-debug.log
+playwright-report
+test-results
+serviceAccountKey.json
+
+# Cypress
+cypress/*
+cypress.env.json
