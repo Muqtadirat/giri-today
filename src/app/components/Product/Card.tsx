@@ -3,10 +3,9 @@ import Link from 'next/link';
 
 import { star } from '@/assets/assets';
 import { CardProps } from '@/redux';
-import { formatPrice, getBrandLogo } from '@/utils';
+import { formatPrice, formatUrl, getBrandLogo } from '@/utils';
 
 import { CartButton } from '../Buttons';
-
 interface ProductCardProps {
   cardDetails: CardProps;
 }
@@ -15,10 +14,14 @@ const Card: React.FC<ProductCardProps> = ({ cardDetails }) => {
   const { id, image, price, brandLogo, name, rating } = cardDetails;
 
   const brandLogoSrc = getBrandLogo(brandLogo);
+  const url = formatUrl(name);
 
   return (
     <div className="w-full lg:max-w-[314px] text-text-secondary bg-white rounded-2xl shadow-lg overflow-hidden">
-      <Link href={`/product/${id}`} aria-label={`View details for ${name}`}>
+      <Link
+        href={`/product/${url}?id=${id}`}
+        aria-label={`View details for ${name}`}
+      >
         <Image
           src={image}
           alt={`${name} product image`}

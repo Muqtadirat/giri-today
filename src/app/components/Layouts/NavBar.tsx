@@ -17,7 +17,7 @@ interface NavBarProps {
   pathname: string;
 }
 
-const NavBar: React.FC<NavBarProps> = ({}) => {
+const NavBar: React.FC<NavBarProps> = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [selectedPill, setSelectedPill] = useState<string | null>(null);
 

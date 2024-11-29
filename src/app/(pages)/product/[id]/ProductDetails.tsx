@@ -11,9 +11,14 @@ import { arrowLeft } from '@/assets/assets';
 import { dispatch, useProductSlice } from '@/redux';
 import { getProductsHandler } from '@/services/productService';
 
-const ProductDetails = ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+interface ProductDetailsProps {
+  params: { name: string };
+}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ProductDetails = ({ params }: ProductDetailsProps) => {
   const router = useRouter();
+   const query = new URLSearchParams(window.location.search);
+   const id = query.get('id');
 
   const { setProducts, allProducts } = useProductSlice();
 
@@ -29,6 +34,8 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
     }
   }, [dispatch, isSuccess, data]);
 
+  const selectedProduct = allProducts.find((product) => product.id === id);
+
   return (
     <div className="lg:px-4">
       <Image
@@ -39,7 +46,7 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
       />
       {isLoading ? (
         <DetailsSkeleton />
-      ) : !allProducts.length ? (
+      ) : !selectedProduct ? (
         <div className="mt-10 text-center">
           <p className="text-lg font-raleway">Product Not Found</p>
           <p className="text-sm mb-6 mt-2">
@@ -55,9 +62,7 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
           </PrimaryButton>
         </div>
       ) : (
-        allProducts.map((product) => (
-          <Details key={product.id} productDetails={product} />
-        ))
+        <Details key={selectedProduct.id} productDetails={selectedProduct} />
       )}
     </div>
   );
