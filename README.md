@@ -29,7 +29,7 @@ Ensure you have the following installed on your development machine:
 1. **Clone the Repository**:
 
    ```bash
-    git clone https://github.com/muqtadirat/giri-today.git
+    git clone https://github.com/Muqtadirat/giri-today.git
    ```
 
 2. **Install Dependencies**:
