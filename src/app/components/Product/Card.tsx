@@ -1,8 +1,10 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+
 import { star } from '@/assets/assets';
-import { formatPrice, getBrandLogo } from '@/utils';
 import { CardProps } from '@/redux';
+import { formatPrice, getBrandLogo } from '@/utils';
+
 import { CartButton } from '../Buttons';
 
 interface ProductCardProps {

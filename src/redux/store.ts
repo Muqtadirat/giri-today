@@ -2,6 +2,7 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
+
 import CartReducer from "./features/products/cartSlice"
 import ProductReducer from "./features/products/productSlice"
 

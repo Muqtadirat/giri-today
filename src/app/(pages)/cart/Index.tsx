@@ -1,10 +1,12 @@
 'use client';
 
-import OrderSummary from './OrderSummary';
-import DeliveryInformation from './DeliveryInfo';
 import Image from 'next/image';
-import { arrowLeft } from '@/assets/assets';
 import { useRouter } from 'next/navigation';
+
+import { arrowLeft } from '@/assets/assets';
+
+import DeliveryInformation from './DeliveryInfo';
+import OrderSummary from './OrderSummary';
 
 const Cart = () => {
   const router = useRouter();

@@ -1,5 +1,7 @@
-import { CartProps } from '@/redux';
 import Image from 'next/image';
+
+import { CartProps } from '@/redux';
+
 import { QuantityButton } from '../Buttons';
 
 interface CartItemProps {

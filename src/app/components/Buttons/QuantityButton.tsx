@@ -1,9 +1,10 @@
 'use client';
 
-import { minusIcon, plusIcon } from '@/assets/assets';
+import { dispatch } from '@/redux/store';
+
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { dispatch, RootState } from '@/redux/store';
+
+import { minusIcon, plusIcon } from '@/assets/assets';
 import { useCartSlice } from '@/redux';
 
 interface QuantityButtonProps {
@@ -11,7 +12,7 @@ interface QuantityButtonProps {
 }
 
 const QuantityButton: React.FC<QuantityButtonProps> = ({ id }) => {
-  const { items, updateQuantity,removeFromCart } = useCartSlice();
+  const { items, updateQuantity, removeFromCart } = useCartSlice();
 
   const item = items.find((item) => item.id === id);
   const quantity = item ? item.quantity : 0;

@@ -1,9 +1,10 @@
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
 import { CartItem, PrimaryButton } from '@/app/components';
 import { bulb } from '@/assets/assets';
 import { useCartSlice } from '@/redux';
 import { formatPrice } from '@/utils';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 const OrderSummary = () => {
   const { items, totalPrice } = useCartSlice();

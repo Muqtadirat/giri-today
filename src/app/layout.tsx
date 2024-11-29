@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
+
 import './globals.css';
-import { libre_caslon, raleway, roboto } from '@/assets/fonts';
 import { Providers } from '@/context/provider';
+
+import { libre_caslon, raleway, roboto } from '@/assets/fonts';
+
 import { Layout } from './components';
 
 export const metadata: Metadata = {

@@ -1,3 +1,4 @@
+import { CartProps, useCartSlice } from './cartSlice';
 import {
   ProductProps,
   ProductState,
@@ -6,7 +7,6 @@ import {
   DetailsProps,
 } from './productSlice';
 
-import { CartProps, useCartSlice } from './cartSlice';
 
 export {
   type CardProps,

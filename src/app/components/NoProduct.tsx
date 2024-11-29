@@ -1,4 +1,5 @@
 import { dispatch, useProductSlice } from '@/redux';
+
 import { PrimaryButton } from './Buttons';
 
 const NoProduct = () => {

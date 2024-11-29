@@ -1,9 +1,10 @@
 'use client';
 
+import Image from 'next/image';
+
 import { PrimaryButton, QuantityButton } from '@/app/components';
 import { star } from '@/assets/assets';
 import { DetailsProps, dispatch, useCartSlice } from '@/redux';
-import Image from 'next/image';
 
 interface ProductDetailsProps {
   productDetails: DetailsProps;

@@ -1,4 +1,5 @@
 export const getFilteredProducts = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   products: any[],
   selectedCategory: string | null,
   selectedSubCategory: string | null,

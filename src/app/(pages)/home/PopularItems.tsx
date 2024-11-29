@@ -1,10 +1,12 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import { getProductsHandler } from '@/services/productService';
 import { useEffect, useState } from 'react';
-import { dispatch, useProductSlice } from '@/redux';
+
+import { useQuery } from '@tanstack/react-query';
+
 import { Card, CardSkeleton, NoProduct, PrimaryButton } from '@/app/components';
+import { dispatch, useProductSlice } from '@/redux';
+import { getProductsHandler } from '@/services/productService';
 import { getFilteredProducts } from '@/utils';
 
 const PopularItems = () => {

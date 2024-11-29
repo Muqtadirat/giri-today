@@ -1,6 +1,8 @@
-import { useSelector } from 'react-redux';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/redux/store';
+import { useSelector } from 'react-redux';
+
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { BrandName } from '@/utils';
 
 export interface CardProps {

@@ -1,9 +1,12 @@
 'use client';
 
-import { CartIcon } from '@/assets/assets';
 import React, { useState } from 'react';
-import { dispatch, useCartSlice } from '@/redux';
+
 import { motion } from 'framer-motion';
+
+import { CartIcon } from '@/assets/assets';
+import { dispatch, useCartSlice } from '@/redux';
+
 
 interface CartButtonProps {
   product: { id: string; name: string; price: number; image: string };

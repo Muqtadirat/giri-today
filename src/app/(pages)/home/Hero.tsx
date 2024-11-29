@@ -1,6 +1,8 @@
+import Image from 'next/image';
+
 import { SecondaryButton } from '@/app/components';
 import { bestBuy, headerImg } from '@/assets/assets';
-import Image from 'next/image';
+
 import brands from './constants/brands';
 
 const Hero = () => {

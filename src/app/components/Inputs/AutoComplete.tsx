@@ -3,10 +3,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { handleEnterKeyDown, truncateText } from '@/utils';
-import { AutoCompleteProps } from './types';
+
 import { useClickOutside } from '@/hooks/useClickOutside';
+
 import { DropDownIcon } from '@/assets/assets';
+import { handleEnterKeyDown, truncateText } from '@/utils';
+
+import { AutoCompleteProps } from './types';
 
 const AutoComplete: React.FC<AutoCompleteProps> = ({
   name,

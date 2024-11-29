@@ -1,13 +1,15 @@
 'use client';
 
-import { Details, DetailsSkeleton, PrimaryButton } from '@/app/components';
-import { arrowLeft } from '@/assets/assets';
-import { dispatch, useProductSlice } from '@/redux';
-import { getProductHandler, getProductsHandler } from '@/services/productService';
+import { useEffect } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+
+import { Details, DetailsSkeleton, PrimaryButton } from '@/app/components';
+import { arrowLeft } from '@/assets/assets';
+import { dispatch, useProductSlice } from '@/redux';
+import { getProductsHandler } from '@/services/productService';
 
 const ProductDetails = ({ params }: { params: { id: string } }) => {
   const { id } = params;

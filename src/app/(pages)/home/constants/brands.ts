@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 import {
   bestBuyDark,
   ebay,
@@ -6,7 +8,6 @@ import {
   simon,
   tapestry,
 } from '@/assets/assets';
-import { StaticImageData } from 'next/image';
 
 interface BrandsProps {
   alt: string;

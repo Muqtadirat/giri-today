@@ -1,13 +1,17 @@
 'use client';
 
-import { CartIcon, logoFull } from '@/assets/assets';
-import Image from 'next/image';
-import { AutoComplete } from '../Inputs';
-import { PillButton, PrimaryButton } from '../Buttons';
-import { clothingAndApparel, electronics, homeAndKitchen } from './pills';
 import { useState } from 'react';
+
+import Image from 'next/image';
 import Link from 'next/link';
+
+import { CartIcon, logoFull } from '@/assets/assets';
 import { dispatch, useProductSlice } from '@/redux';
+
+import { PillButton, PrimaryButton } from '../Buttons';
+import { AutoComplete } from '../Inputs';
+
+import { clothingAndApparel, electronics, homeAndKitchen } from './pills';
 
 interface NavBarProps {
   pathname: string;
