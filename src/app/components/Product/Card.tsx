@@ -32,10 +32,10 @@ const Card: React.FC<ProductCardProps> = ({ cardDetails }) => {
           <div>
             <p className="text-base font-medium text-text-primary">{name}</p>
             <p className="text-lg font-semibold text-primary">
-              ₦{formatPrice(price)}
+              ${formatPrice(price)}
             </p>
           </div>
-          <CartButton product={cardDetails}/>
+          <CartButton product={cardDetails} />
         </div>
         <div className="flex justify-between items-center">
           {brandLogoSrc && (

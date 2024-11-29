@@ -12,10 +12,12 @@ export interface CartProps {
 
 interface CartState {
   items: CartProps[];
+  totalPrice: number;
 }
 
 const initialState: CartState = {
   items: [],
+  totalPrice: 0,
 };
 
 const cartSlice = createSlice({
@@ -31,12 +33,21 @@ const cartSlice = createSlice({
       } else {
         state.items.push(action.payload);
       }
+      state.totalPrice = state.items.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0,
+      );
     },
     removeFromCart(state, action: PayloadAction<string>) {
       state.items = state.items.filter((item) => item.id !== action.payload);
+      state.totalPrice = state.items.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0,
+      );
     },
     clearCart(state) {
       state.items = [];
+      state.totalPrice = 0;
     },
     updateQuantity(
       state,
@@ -50,6 +61,10 @@ const cartSlice = createSlice({
             (item) => item.id !== action.payload.id,
           );
         }
+        state.totalPrice = state.items.reduce(
+          (total, item) => total + item.price * item.quantity,
+          0,
+        );
       }
     },
   },

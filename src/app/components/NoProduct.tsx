@@ -3,6 +3,7 @@ import { PrimaryButton } from './Buttons';
 
 const NoProduct = () => {
   const { setSelectedCategory, setSelectedSubCategory } = useProductSlice();
+  
   return (
     <div className="text-center col-span-4 py-6 space-y-4">
       <p className="text-lg font-medium text-text-secondary">
@@ -15,8 +16,8 @@ const NoProduct = () => {
       <PrimaryButton
         type="button"
         onClick={() => {
-          dispatch(setSelectedCategory(''));
-          dispatch(setSelectedSubCategory(''));
+          dispatch(setSelectedCategory(null));
+          dispatch(setSelectedSubCategory(null));
         }}
         ariaLabel="Reset Filters"
       >

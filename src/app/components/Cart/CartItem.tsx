@@ -20,8 +20,8 @@ const CartItem: React.FC<CartItemProps> = ({ cartDetails }) => {
           className="lg:w-[176px] lg:h-[80px] object-contain"
         />
         <div className="flex gap-2 flex-col">
-          <p className="text-lg">{name}</p>
-          <p>₦{price}</p>
+          <p className="text-lg font-semibold font-raleway">{name}</p>
+          <p className="font-semibold">${price}</p>
           <p className="text-sm">Quantity: {quantity}</p>
         </div>
         <div>

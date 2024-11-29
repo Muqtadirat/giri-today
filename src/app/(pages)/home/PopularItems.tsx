@@ -2,11 +2,13 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getProductsHandler } from '@/services/productService';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { dispatch, useProductSlice } from '@/redux';
-import { Card, CardSkeleton, NoProduct } from '@/app/components';
+import { Card, CardSkeleton, NoProduct, PrimaryButton } from '@/app/components';
+import { getFilteredProducts } from '@/utils';
 
 const PopularItems = () => {
+   const [displayedProductsCount, setDisplayedProductsCount] = useState(8);
   const { setProducts, allProducts, selectedCategory, selectedSubCategory } =
     useProductSlice();
 
@@ -22,16 +24,16 @@ const PopularItems = () => {
     }
   }, [dispatch, isSuccess, data]);
 
-  const filteredProducts = allProducts.filter((product) => {
-    const isPopular = product.tags.includes('popular');
-    const matchesCategory = selectedCategory
-      ? product.category === selectedCategory
-      : true;
-    const matchesSubCategory = selectedSubCategory
-      ? product.subcategory === selectedSubCategory
-      : true;
-    return isPopular && matchesCategory && matchesSubCategory;
-  });
+  const filteredProducts = getFilteredProducts(
+    allProducts,
+    selectedCategory,
+    selectedSubCategory,
+    'popular',
+  );
+
+  const loadMoreProducts = () => {
+    setDisplayedProductsCount((prevCount) => prevCount + 4);
+  };
 
   return (
     <div className="mt-8">
@@ -48,11 +50,23 @@ const PopularItems = () => {
         ) : filteredProducts.length === 0 ? (
           <NoProduct />
         ) : (
-          filteredProducts.map((product) => (
-            <Card key={product.id} cardDetails={product} />
-          ))
+          filteredProducts
+            .slice(0, displayedProductsCount)
+            .map((product) => <Card key={product.id} cardDetails={product} />)
         )}
       </div>
+      {filteredProducts.length > displayedProductsCount && (
+        <div className="mt-8">
+          <PrimaryButton
+            type="submit"
+            ariaLabel="Load more products"
+            isSubmitting={isLoading}
+            onClick={loadMoreProducts}
+          >
+            Load more
+          </PrimaryButton>
+        </div>
+      )}
     </div>
   );
 };

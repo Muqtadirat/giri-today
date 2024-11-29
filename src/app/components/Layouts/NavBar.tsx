@@ -50,8 +50,9 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
             <AutoComplete
               value={selectedCategory || ''}
               onChange={(value) => {
-                dispatch(setSelectedCategory(value));
                 setSelectedPill(null);
+                dispatch(setSelectedSubCategory(null));
+                dispatch(setSelectedCategory(value));
               }}
               options={[
                 {

@@ -1,15 +1,11 @@
 'use client';
 
-import { Details, DetailsSkeleton } from '@/app/components';
+import { Details, DetailsSkeleton, PrimaryButton } from '@/app/components';
 import { arrowLeft } from '@/assets/assets';
 import { dispatch, useProductSlice } from '@/redux';
-import {
-  getProductHandler,
-  getProductsHandler,
-} from '@/services/productService';
+import { getProductHandler, getProductsHandler } from '@/services/productService';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -20,13 +16,13 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
   const { setProducts, allProducts } = useProductSlice();
 
   const { isSuccess, data, isLoading } = useQuery({
-    queryFn: () => getProductHandler(id),
+    queryFn: () => getProductsHandler(),
     queryKey: ['all-products', id],
     staleTime: Infinity,
   });
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && data) {
       dispatch(setProducts(data));
     }
   }, [dispatch, isSuccess, data]);
@@ -41,6 +37,21 @@ const ProductDetails = ({ params }: { params: { id: string } }) => {
       />
       {isLoading ? (
         <DetailsSkeleton />
+      ) : !allProducts.length ? (
+        <div className="mt-10 text-center">
+          <p className="text-lg font-raleway">Product Not Found</p>
+          <p className="text-sm mb-6 mt-2">
+            We couldn’t find the product you’re looking for. Please check the ID
+            or browse other items.
+          </p>
+          <PrimaryButton
+            type="button"
+            onClick={() => router.push('/')}
+            ariaLabel="Back to home button"
+          >
+            Back to Home
+          </PrimaryButton>
+        </div>
       ) : (
         allProducts.map((product) => (
           <Details key={product.id} productDetails={product} />

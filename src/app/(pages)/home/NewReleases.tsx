@@ -4,16 +4,13 @@ import { useQuery } from '@tanstack/react-query';
 import { getProductsHandler } from '@/services/productService';
 import { useEffect, useState } from 'react';
 import { dispatch, useProductSlice } from '@/redux';
-import { Card, CardSkeleton, NoProduct } from '@/app/components';
+import { Card, CardSkeleton, NoProduct, PrimaryButton } from '@/app/components';
+import { getFilteredProducts } from '@/utils';
 
 const NewReleases = () => {
-   const {
-    setProducts,
-    allProducts,
-    selectedCategory,
-    selectedSubCategory,
-  
-  } = useProductSlice();
+  const [displayedProductsCount, setDisplayedProductsCount] = useState(8);
+  const { setProducts, allProducts, selectedCategory, selectedSubCategory } =
+    useProductSlice();
 
   const { isSuccess, data, isLoading } = useQuery({
     queryFn: () => getProductsHandler(),
@@ -22,21 +19,21 @@ const NewReleases = () => {
   });
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && data) {
       dispatch(setProducts(data));
     }
   }, [dispatch, isSuccess, data]);
 
-  const filteredProducts = allProducts.filter((product) => {
-    const isNew = product.tags.includes('new');
-    const matchesCategory = selectedCategory
-      ? product.category === selectedCategory
-      : true;
-    const matchesSubCategory = selectedSubCategory
-      ? product.subcategory === selectedSubCategory
-      : true;
-    return isNew && matchesCategory && matchesSubCategory;
-  });
+  const filteredProducts = getFilteredProducts(
+    allProducts,
+    selectedCategory,
+    selectedSubCategory,
+    'new',
+  );
+
+  const loadMoreProducts = () => {
+    setDisplayedProductsCount((prevCount) => prevCount + 4);
+  };
 
   return (
     <div className="mt-8">
@@ -53,11 +50,24 @@ const NewReleases = () => {
         ) : filteredProducts.length === 0 ? (
           <NoProduct />
         ) : (
-          filteredProducts.map((product) => (
-            <Card key={product.id} cardDetails={product} />
-          ))
+          filteredProducts
+            .slice(0, displayedProductsCount)
+            .map((product) => <Card key={product.id} cardDetails={product} />)
         )}
       </div>
+
+      {filteredProducts.length > displayedProductsCount && (
+        <div className="mt-8">
+          <PrimaryButton
+            type="submit"
+            ariaLabel="Load more products"
+            isSubmitting={isLoading}
+            onClick={loadMoreProducts}
+          >
+            Load more
+          </PrimaryButton>
+        </div>
+      )}
     </div>
   );
 };

@@ -25,7 +25,7 @@ const Details: React.FC<ProductDetailsProps> = ({ productDetails }) => {
             {name}
           </h4>
           <div className="flex items-center justify-between mt-6 mb-10 font-semibold">
-            <p>₦{price}</p>
+            <p>${price}</p>
             <div className="flex items-center gap-x-1 text-sm">
               <Image src={star} alt="star icon" />
               <p className="font-medium">{rating}</p>

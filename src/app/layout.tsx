@@ -5,9 +5,12 @@ import { Providers } from '@/context/provider';
 import { Layout } from './components';
 
 export const metadata: Metadata = {
-  title: 'Giri Today - Quality Products for Every Occasion',
+  title: 'WeShop - Quality Products for Every Occasion',
   description:
-    'Shop a wide range of high-quality products at Giri Today. Find everything you need, from gadgets to fashion, with fast shipping and great deals.',
+    'Shop a wide range of high-quality products at WeShop. Find everything you need, from gadgets to fashion, with fast shipping and great deals.',
+  icons: {
+    icon: '/logo.svg',
+  },
 };
 
 export default function RootLayout({
@@ -17,9 +20,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* <head>
-        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-      </head> */}
       <body
         className={`${roboto.className} ${raleway.variable} ${libre_caslon.variable}`}
       >
